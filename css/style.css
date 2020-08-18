@@ -1,0 +1,32 @@
+.nav{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    background-color: grey;
+    padding: 5px;
+    margin: 20px;
+}
+
+.nav-item{
+    padding: 5px;
+    margin: 5px;
+    width: 65px;
+    background-color: lightgrey;
+    border-radius: 15px;
+    text-align: center;
+}
+.nav-link{
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+}
+.active{
+    background-color: lightpink;
+}
+
+.content{
+    background-color: lightgrey;
+    font-size: 17px;
+    padding: 10px;
+    margin: 20px;
+}
