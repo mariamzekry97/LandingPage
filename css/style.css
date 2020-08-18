@@ -5,6 +5,9 @@
     background-color: grey;
     padding: 5px;
     margin: 20px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
 }
 
 .nav-item{
@@ -20,13 +23,12 @@
     color: white;
     text-decoration: none;
 }
-.active{
-    background-color: lightpink;
-}
-
 .content{
     background-color: lightgrey;
     font-size: 17px;
     padding: 10px;
     margin: 20px;
+}
+.active{
+    background-color: lightpink;
 }

@@ -12,19 +12,23 @@ let index = 1;
 
 
 nav.addEventListener('click', (event) => {
-    const targetId = 'item_' + event.target.id.split('_')[1];
-    
+    const targetId = event.target.id.split('_')[1];
+    document.getElementById(`section_${targetId}`).scrollIntoView();
     for(let i = 1; i < index; i++)
     {
         const curId = `item_${i}`;
-        if(curId === targetId)
+        if(i == targetId)
         {
             document.getElementById(curId).classList.add('active');
+            document.getElementById(`section_${i}`).classList.add('active');
+
             console.log('curId = ', curId);
         }
         else
         {
             document.getElementById(curId).classList.remove('active');
+            document.getElementById(`section_${i}`).classList.remove('active');
+
         }
     }
 })
@@ -36,7 +40,6 @@ function getPageContent(){
 
         const link = document.createElement("a");
         link.innerText = item.name;
-        link.setAttribute("href", `#section_${index}`);
         link.setAttribute("id", `link_${index}`);
         link.classList.add("nav-link");
     
@@ -46,14 +49,14 @@ function getPageContent(){
         navItem.classList.add("nav-item");
       
         const content = document.createElement("div");
-      
+        content.setAttribute("id", `section_${index}`);
+        content.classList.add("content");
+
         const h = document.createElement("h3");
         h.innerText = item.name;
-        h.setAttribute("id", `section_${index}`);
       
         const p = document.createElement("p");
         p.innerText = item.content;
-        p.classList.add("content");
         content.appendChild(h);
         content.appendChild(p);
         fragment.appendChild(content);
