@@ -10,29 +10,6 @@ const fragment = document.createDocumentFragment();
 const nav = document.querySelector(".nav");
 let index = 1;
 
-
-nav.addEventListener('click', (event) => {
-    const targetId = event.target.id.split('_')[1];
-    document.getElementById(`section_${targetId}`).scrollIntoView();
-    for(let i = 1; i < index; i++)
-    {
-        const curId = `item_${i}`;
-        if(i == targetId)
-        {
-            document.getElementById(curId).classList.add('active');
-            document.getElementById(`section_${i}`).classList.add('active');
-
-            console.log('curId = ', curId);
-        }
-        else
-        {
-            document.getElementById(curId).classList.remove('active');
-            document.getElementById(`section_${i}`).classList.remove('active');
-
-        }
-    }
-})
-
 function getPageContent(){
     for (let item of items) {
         const navItem = document.createElement("li");
@@ -67,4 +44,60 @@ function getPageContent(){
       document.body.appendChild(fragment);
 }
 
+function addActiveState(targetId){
+  for(let i = 1; i < index; i++)
+  {
+      const curId = `item_${i}`;
+      if(i == targetId)
+      {
+          document.getElementById(curId).classList.add('active');
+          document.getElementById(`section_${i}`).classList.add('active');
+
+          console.log('curId = ', curId);
+      }
+      else
+      {
+          document.getElementById(curId).classList.remove('active');
+          document.getElementById(`section_${i}`).classList.remove('active');
+
+      }
+  }
+}
+nav.addEventListener('click', (event) => {
+  const targetId = event.target.id.split('_')[1];
+  document.getElementById(`section_${targetId}`).scrollIntoView();
+  addActiveState(targetId);
+})
+
+
+function isInViewport(section) {
+  const rect = section.getBoundingClientRect();
+  return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+
+  );
+}
+let scroll = 0;
+document.addEventListener("scroll", function(){
+  //console.log('scrolling = ' + scroll);
+  for(let i = 1; i < index; i++)
+  {
+    const section = document.getElementById(`section_${i}`);
+    if(isInViewport(section))
+    {
+      //console.log('YESSSSSSSSSSSSSSSSSSS');
+      addActiveState(i);
+      return;
+    }
+  }
+  //console.log('done = ' + scroll);
+  //scroll++;
+})
+
 getPageContent();
+
+
+
